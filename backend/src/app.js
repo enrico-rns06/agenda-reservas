@@ -22,4 +22,8 @@ app.get('/db-test', async (req, res) => {
     }
 });
 
+const userRoutes = require('./routes/userRoutes');
+app.use('/users', userRoutes);
+
+
 module.exports = app;
