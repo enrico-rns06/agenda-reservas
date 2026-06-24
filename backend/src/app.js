@@ -28,5 +28,8 @@ app.use('/users', userRoutes);
 const bookingRoutes = require('./routes/bookingRoutes');
 app.use('/bookings', bookingRoutes);
 
+const authRoutes = require('./routes/authRoutes');
+app.use('/auth', authRoutes);
+
 
 module.exports = app;
