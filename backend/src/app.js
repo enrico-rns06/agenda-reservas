@@ -25,5 +25,8 @@ app.get('/db-test', async (req, res) => {
 const userRoutes = require('./routes/userRoutes');
 app.use('/users', userRoutes);
 
+const bookingRoutes = require('./routes/bookingRoutes');
+app.use('/bookings', bookingRoutes);
+
 
 module.exports = app;
