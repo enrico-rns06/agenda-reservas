@@ -1,4 +1,5 @@
 const pool = require('../config/database');
+const { sendBookingConfirmation, sendBookingCancellation } = require('../services/emailService');
 
 async function create(req, res) {
   const { client_id, professional_id, service_id, date, time } = req.body;
@@ -39,6 +40,7 @@ async function list(req, res) {
 
     res.json(result.rows);
   } catch (err) {
+    console.error('Erro updateStatus:', err);
     res.status(500).json({ error: err.message });
   }
 }
@@ -62,7 +64,32 @@ async function updateStatus(req, res) {
       return res.status(404).json({ error: 'Agendamento não encontrado' });
     }
 
-    res.json(result.rows[0]);
+    const booking = result.rows[0];
+
+    const details = await pool.query(`
+      SELECT 
+        c.name AS client_name,
+        c.email AS client_email,
+        p.name AS professional_name,
+        s.name AS service_name,
+        b.date,
+        b.time
+      FROM bookings b
+      JOIN users c ON b.client_id = c.id
+      JOIN users p ON b.professional_id = p.id
+      JOIN services s ON b.service_id = s.id
+      WHERE b.id = $1
+    `, [id]);
+
+    const info = details.rows[0];
+
+    if (status === 'confirmed') {
+      await sendBookingConfirmation(info);
+    } else if (status === 'cancelled') {
+      await sendBookingCancellation(info);
+    }
+
+    res.json(booking);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
