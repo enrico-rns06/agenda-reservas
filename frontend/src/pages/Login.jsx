@@ -22,7 +22,7 @@ export default function Login() {
       if (data.user.role === 'professional') {
         navigate('/dashboard');
       } else {
-        navigate('/booking');
+        navigate('/');
       }
     } catch (err) {
       setError(err.response?.data?.error || 'Erro ao fazer login');
@@ -30,34 +30,43 @@ export default function Login() {
   }
 
   return (
-    <div style={styles.container}>
+    <div style={styles.page}>
       <div style={styles.card}>
-        <h1 style={styles.title}>Agenda de Reservas</h1>
-        <h2 style={styles.subtitle}>Entrar</h2>
+        <div style={styles.logo}>
+          <span style={styles.logoIcon}>A</span>
+          <span style={styles.logoText}>Agenda</span>
+        </div>
+        <h2 style={styles.title}>Entrar na sua conta</h2>
         <form onSubmit={handleSubmit} style={styles.form}>
-          <input
-            style={styles.input}
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-          <input
-            style={styles.input}
-            type="password"
-            name="password"
-            placeholder="Senha"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
+          <div style={styles.field}>
+            <label style={styles.label}>E-mail</label>
+            <input
+              style={styles.input}
+              type="email"
+              name="email"
+              placeholder="seu@email.com"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div style={styles.field}>
+            <label style={styles.label}>Senha</label>
+            <input
+              style={styles.input}
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
           {error && <p style={styles.error}>{error}</p>}
           <button style={styles.button} type="submit">Entrar</button>
         </form>
         <p style={styles.link}>
-          Não tem conta? <Link to="/register">Cadastre-se</Link>
+          Nao tem conta? <Link to="/register" style={styles.linkGreen}>Cadastre-se</Link>
         </p>
       </div>
     </div>
@@ -65,26 +74,97 @@ export default function Login() {
 }
 
 const styles = {
-  container: {
+  page: {
     minHeight: '100vh',
+    backgroundColor: '#0f0f0f',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f0f2f5',
+    padding: '1rem',
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: '#1a1a1a',
+    border: '1px solid #2a2a2a',
+    borderRadius: '16px',
     padding: '2rem',
-    borderRadius: '8px',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
     width: '100%',
     maxWidth: '400px',
   },
-  title: { textAlign: 'center', marginBottom: '0.25rem', color: '#333' },
-  subtitle: { textAlign: 'center', marginBottom: '1.5rem', color: '#666', fontWeight: 'normal' },
-  form: { display: 'flex', flexDirection: 'column', gap: '1rem' },
-  input: { padding: '0.75rem', borderRadius: '6px', border: '1px solid #ddd', fontSize: '1rem' },
-  button: { padding: '0.75rem', borderRadius: '6px', border: 'none', backgroundColor: '#4f46e5', color: '#fff', fontSize: '1rem', cursor: 'pointer' },
-  error: { color: 'red', fontSize: '0.875rem' },
-  link: { textAlign: 'center', marginTop: '1rem', color: '#666' },
+  logo: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    marginBottom: '1.5rem',
+  },
+  logoIcon: {
+    width: '32px',
+    height: '32px',
+    backgroundColor: '#22c55e',
+    borderRadius: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: '1rem',
+  },
+  logoText: {
+    fontSize: '1.1rem',
+    fontWeight: '600',
+    color: '#f1f1f1',
+  },
+  title: {
+    fontSize: '1.4rem',
+    fontWeight: '700',
+    color: '#f1f1f1',
+    marginBottom: '1.5rem',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+  },
+  field: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.4rem',
+  },
+  label: {
+    fontSize: '0.85rem',
+    color: '#888',
+  },
+  input: {
+    padding: '0.75rem 1rem',
+    backgroundColor: '#242424',
+    border: '1px solid #2a2a2a',
+    borderRadius: '10px',
+    color: '#f1f1f1',
+    fontSize: '1rem',
+    outline: 'none',
+  },
+  button: {
+    padding: '0.85rem',
+    backgroundColor: '#22c55e',
+    color: '#000',
+    border: 'none',
+    borderRadius: '10px',
+    fontWeight: '700',
+    fontSize: '1rem',
+    marginTop: '0.5rem',
+  },
+  error: {
+    color: '#f87171',
+    fontSize: '0.85rem',
+  },
+  link: {
+    textAlign: 'center',
+    marginTop: '1.25rem',
+    color: '#888',
+    fontSize: '0.9rem',
+  },
+  linkGreen: {
+    color: '#22c55e',
+    textDecoration: 'none',
+    fontWeight: '600',
+  },
 };
