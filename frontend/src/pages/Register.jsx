@@ -24,7 +24,7 @@ export default function Register() {
 
   return (
     <div style={styles.page}>
-      <div style={styles.card}>
+      <div className="glass-card" style={styles.card}>
         <div style={styles.logo}>
           <span style={styles.logoIcon}>A</span>
           <span style={styles.logoText}>Agenda</span>
@@ -34,6 +34,7 @@ export default function Register() {
           <div style={styles.field}>
             <label style={styles.label}>Nome completo</label>
             <input
+              className="glass-input"
               style={styles.input}
               type="text"
               name="name"
@@ -46,6 +47,7 @@ export default function Register() {
           <div style={styles.field}>
             <label style={styles.label}>E-mail</label>
             <input
+              className="glass-input"
               style={styles.input}
               type="email"
               name="email"
@@ -58,6 +60,7 @@ export default function Register() {
           <div style={styles.field}>
             <label style={styles.label}>Senha</label>
             <input
+              className="glass-input"
               style={styles.input}
               type="password"
               name="password"
@@ -70,6 +73,7 @@ export default function Register() {
           <div style={styles.field}>
             <label style={styles.label}>Perfil</label>
             <select
+              className="glass-input"
               style={styles.input}
               name="role"
               value={form.role}
@@ -92,17 +96,13 @@ export default function Register() {
 
 const styles = {
   page: {
-    minHeight: '100vh',
-    backgroundColor: '#0f0f0f',
+    minHeight: 'calc(100vh - 100px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: '1rem',
   },
   card: {
-    backgroundColor: '#1a1a1a',
-    border: '1px solid #2a2a2a',
-    borderRadius: '16px',
     padding: '2rem',
     width: '100%',
     maxWidth: '400px',
@@ -128,12 +128,10 @@ const styles = {
   logoText: {
     fontSize: '1.1rem',
     fontWeight: '600',
-    color: '#f1f1f1',
   },
   title: {
     fontSize: '1.4rem',
     fontWeight: '700',
-    color: '#f1f1f1',
     marginBottom: '1.5rem',
   },
   form: {
@@ -148,16 +146,11 @@ const styles = {
   },
   label: {
     fontSize: '0.85rem',
-    color: '#888',
+    color: 'var(--text-muted)',
   },
   input: {
     padding: '0.75rem 1rem',
-    backgroundColor: '#242424',
-    border: '1px solid #2a2a2a',
-    borderRadius: '10px',
-    color: '#f1f1f1',
     fontSize: '1rem',
-    outline: 'none',
   },
   button: {
     padding: '0.85rem',
@@ -176,7 +169,7 @@ const styles = {
   link: {
     textAlign: 'center',
     marginTop: '1.25rem',
-    color: '#888',
+    color: 'var(--text-muted)',
     fontSize: '0.9rem',
   },
   linkGreen: {

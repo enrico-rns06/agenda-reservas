@@ -43,9 +43,10 @@ export default function Home() {
       <div style={styles.hero}>
         <h1 style={styles.heroTitle}>Seja bem-vindo</h1>
         <p style={styles.heroDate}>{new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' })}</p>
-        <div style={styles.searchBox}>
+        <div className="glass-card" style={styles.searchBox}>
           <span style={styles.searchIcon}>🔍</span>
           <input
+            className="glass-input"
             style={styles.searchInput}
             type="text"
             placeholder="Buscar profissional..."
@@ -62,7 +63,7 @@ export default function Home() {
         ) : (
           <div style={styles.grid}>
             {filtered.map(p => (
-              <div key={p.id} style={styles.card}>
+              <div key={p.id} className="glass-card" style={styles.card}>
                 <div style={styles.avatar}>
                   {p.name.charAt(0).toUpperCase()}
                 </div>
@@ -88,21 +89,19 @@ export default function Home() {
 const styles = {
   page: {
     minHeight: '100vh',
-    backgroundColor: '#0f0f0f',
   },
   hero: {
-    padding: '3rem 2rem 2rem',
+    padding: '2rem 1.5rem 2rem',
     maxWidth: '900px',
     margin: '0 auto',
   },
   heroTitle: {
     fontSize: '2rem',
     fontWeight: '700',
-    color: '#f1f1f1',
     marginBottom: '0.25rem',
   },
   heroDate: {
-    color: '#888',
+    color: 'var(--text-muted)',
     fontSize: '0.95rem',
     marginBottom: '1.5rem',
     textTransform: 'capitalize',
@@ -111,9 +110,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '0.75rem',
-    backgroundColor: '#1a1a1a',
-    border: '1px solid #2a2a2a',
-    borderRadius: '12px',
     padding: '0.75rem 1rem',
   },
   searchIcon: {
@@ -122,24 +118,21 @@ const styles = {
   searchInput: {
     background: 'none',
     border: 'none',
-    outline: 'none',
-    color: '#f1f1f1',
     fontSize: '1rem',
     width: '100%',
   },
   section: {
     maxWidth: '900px',
     margin: '0 auto',
-    padding: '1rem 2rem 3rem',
+    padding: '1rem 1.5rem 3rem',
   },
   sectionTitle: {
     fontSize: '1.1rem',
     fontWeight: '600',
-    color: '#f1f1f1',
     marginBottom: '1rem',
   },
   empty: {
-    color: '#888',
+    color: 'var(--text-muted)',
   },
   grid: {
     display: 'flex',
@@ -150,9 +143,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-    backgroundColor: '#1a1a1a',
-    border: '1px solid #2a2a2a',
-    borderRadius: '12px',
     padding: '1rem',
   },
   avatar: {
@@ -174,12 +164,11 @@ const styles = {
   cardName: {
     fontSize: '1rem',
     fontWeight: '600',
-    color: '#f1f1f1',
     marginBottom: '0.15rem',
   },
   cardEmail: {
     fontSize: '0.8rem',
-    color: '#888',
+    color: 'var(--text-muted)',
     marginBottom: '0.25rem',
   },
   cardServices: {

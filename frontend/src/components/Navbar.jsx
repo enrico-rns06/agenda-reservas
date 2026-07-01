@@ -1,8 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   function handleLogout() {
@@ -11,7 +13,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav style={styles.nav}>
+    <nav className="glass-card" style={styles.nav}>
       <Link to="/" style={styles.logo}>
         <span style={styles.logoIcon}>A</span>
         <span style={styles.logoText}>Agenda</span>
@@ -29,7 +31,14 @@ export default function Navbar() {
         )}
       </div>
 
-      <div>
+      <div style={styles.right}>
+        <button
+          style={styles.themeBtn}
+          onClick={toggleTheme}
+          aria-label="Alternar tema"
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
         {user ? (
           <button style={styles.btn} onClick={handleLogout}>Sair</button>
         ) : (
@@ -45,12 +54,12 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '1rem 2rem',
-    backgroundColor: '#111',
-    borderBottom: '1px solid #2a2a2a',
+    padding: '0.9rem 1.5rem',
+    margin: '1rem 1.5rem',
     position: 'sticky',
-    top: 0,
+    top: '1rem',
     zIndex: 100,
+    borderRadius: '999px',
   },
   logo: {
     display: 'flex',
@@ -73,17 +82,31 @@ const styles = {
   logoText: {
     fontSize: '1.1rem',
     fontWeight: '600',
-    color: '#f1f1f1',
   },
   links: {
     display: 'flex',
     gap: '2rem',
   },
   link: {
-    color: '#888',
+    color: 'var(--text-muted)',
     textDecoration: 'none',
     fontSize: '0.95rem',
-    transition: 'color 0.2s',
+  },
+  right: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem',
+  },
+  themeBtn: {
+    width: '38px',
+    height: '38px',
+    borderRadius: '50%',
+    border: '1px solid var(--glass-border)',
+    backgroundColor: 'var(--glass-bg-strong)',
+    fontSize: '1rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   btn: {
     padding: '0.5rem 1.25rem',
